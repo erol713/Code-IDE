@@ -2,7 +2,7 @@
 
     <head>
         
-        <title>jQuery</title>
+        <title>Code IDE</title>
  
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         
@@ -19,7 +19,7 @@
             #header {
                 
                 width:100%;
-                background-color: #EEEEEE;
+                background-color: #EEE;
                 padding:5px;
                 height: 30px;
                 
@@ -80,6 +80,7 @@
             
             textarea {
                 
+                width: 50%;
                 resize: none;
                 border-top: none;
                 border-color: grey;
@@ -121,12 +122,9 @@
             
             <div id="buttonContainer">
                 
-                <div class="toggleButton active" id="html">HTML</div>
-                
-                <div class="toggleButton" id="css">CSS</div>
-                
-                <div class="toggleButton" id="javascript">JavaScript</div>
-                
+                <div class="toggleButton active" id="html">HTML</div>      
+                <div class="toggleButton" id="css">CSS</div>                
+                <div class="toggleButton" id="javascript">JavaScript</div>  
                 <div class="toggleButton active" id="output">Output</div>
             
             </div>
@@ -140,9 +138,6 @@
             <textarea id="cssPanel" class="panel hidden">p { color: green; }</textarea>
 
             <textarea id="javascriptPanel" class="panel hidden">document.getElementById("paragraph").innerHTML = "This is what you actually get with the magic of JS!";</textarea>
-
-            <textarea id="javascriptPanel" class="panel hidden">document.getElementById("paragraph").innerHTML = "This is what you actually get with the magic of JS !";</textarea>
-
             
             <iframe id="outputPanel" class="panel"></iframe>
         
@@ -153,9 +148,12 @@
             
             function updateOutput() {
                 
-                $("iframe").contents().find("html").html("<html><head><style type='text/css'>" + $("#cssPanel").val() + "</style></head><body>" + $("#htmlPanel").val() + "</body></html>");
+                $("iframe").contents().find("html").html("<html><head><style type='text/css'>" + 
+                	$("#cssPanel").val() + "</style></head><body>" + 
+                	$("#htmlPanel").val() + "</body></html>");
                 
-                document.getElementById("outputPanel").contentWindow.eval($("#javascriptPanel").val());
+                document.getElementById("outputPanel").contentWindow.
+                	eval($("#javascriptPanel").val());
                 
                 
                 
@@ -173,21 +171,19 @@
             
             $(".toggleButton").click(function() {
                 
-                $(this).toggleClass("active");
-                
+                $(this).toggleClass("active");                
                 $(this).removeClass("highlightedButton");
                 
-                var panelId = $(this).attr("id") + "Panel";
-                
+                var panelId = $(this).attr("id") + "Panel";                
                 $("#" + panelId).toggleClass("hidden");
                 
                 var numberOfActivePanels = 4 - $('.hidden').length;
                 
                 $(".panel").width(($(window).width() / numberOfActivePanels) - 10);
                 
-            })
+            });
             
-            $(".panel").height($(window).height() - $("#header").height() - 15);
+            $(".panel").height($(window).height() - $("#header").height() -15);
             
             $(".panel").width(($(window).width() / 2) - 10);
             
@@ -203,9 +199,4 @@
         </script>
         
     </body>
-
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> 324a0f5351eedd74d2f6988f6667ea5b842fa6ba
